@@ -11,10 +11,9 @@ ENV NGINX_HTML=/usr/share/nginx/html/
 
 EXPOSE 80/tcp
 
-COPY ./html/*       $NGINX_HTML
-COPY ./conf.d/*     $NGINX_CONF_D
-COPY ./js/*         $NGINX_CONF_D
-COPY ./default.d/*  $NGINX_DEFAULT_D
-COPY ./nginx.conf/* $NGINX_CONF/../
+COPY ./usr/share/nginx/html/* $NGINX_HTML
+COPY ./etc/nginx/conf.d/*     $NGINX_CONF_D
+COPY ./etc/nginx/default.d/*  $NGINX_DEFAULT_D
+COPY ./etc/nginx/*            $NGINX_CONF/../
 
 CMD ["nginx", "-c", "/etc/nginx/http2s3.nginx.conf"]
