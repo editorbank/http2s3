@@ -36,3 +36,5 @@ docker-compose up
 ## Image in Docker Hub
 [https://hub.docker.com/r/editorbank/http2s3](https://hub.docker.com/r/editorbank/http2s3)
 
+## Links
+* [Я сделал свой PyPI-репозитарий с авторизацией и S3. На Nginx](https://habr.com/ru/articles/518126/)

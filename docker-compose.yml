@@ -4,5 +4,16 @@ services:
     image: editorbank/http2s3
     build: .
     ports:
-    - 85:80
+      - 81:80
     restart: always
+
+  s3svr:
+    image: scality/s3server
+    ports:
+      - 82:8000
+    environment:
+     - SCALITY_ACCESS_KEY_ID=YOUR-ACCESS-KEY-HERE
+     - SCALITY_SECRET_ACCESS_KEY=YOUR-SECRET-KEY-HERE
+    volumes:
+     - ./http2s3-Data:/usr/src/app/localData
+     - ./http2s3-Metadata:/usr/src/app/localMetadata

@@ -1,2 +1,5 @@
 *.log
 *.bak
+http2s3-Data/
+http2s3-Metadata/
+s3list.xml
