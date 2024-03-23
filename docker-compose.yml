@@ -4,7 +4,7 @@ services:
     image: editorbank/http2s3
     build: .
     ports:
-      - 81:80
+      - 81:8000
     restart: always
 
   s3svr:
