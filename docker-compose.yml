@@ -1,0 +1,8 @@
+version: '2'
+services:
+  http2s3:
+    image: editorbank/http2s3
+    build: .
+    ports:
+    - 85:80
+    restart: always
