@@ -15,5 +15,5 @@ services:
      - SCALITY_ACCESS_KEY_ID=YOUR-ACCESS-KEY-HERE
      - SCALITY_SECRET_ACCESS_KEY=YOUR-SECRET-KEY-HERE
     volumes:
-     - ./http2s3-Data:/usr/src/app/localData
-     - ./http2s3-Metadata:/usr/src/app/localMetadata
+     - ./.tmp/http2s3-Data:/usr/src/app/localData
+     - ./.tmp/http2s3-Metadata:/usr/src/app/localMetadata
