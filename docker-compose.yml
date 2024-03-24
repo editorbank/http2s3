@@ -3,12 +3,23 @@ services:
   http2s3:
     image: editorbank/http2s3
     build: .
+    #network_mode: "host"  
     ports:
-      - 81:8000
+      - 81:8001
     restart: always
+    environment:
+     - S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE
+     - S3_SECRET_KEY=YOUR-SECRET-KEY-HERE
+     - S3_HOST=s3svr
+     - S3_PORT=8000
+     - S3_PROTOCOL=http
+     - S3_BUCKET=mybucket
+    networks:
+      - default
 
   s3svr:
     image: scality/s3server
+    #network_mode: "host"  
     ports:
       - 82:8000
     environment:
@@ -17,3 +28,10 @@ services:
     volumes:
      - ./.tmp/http2s3-Data:/usr/src/app/localData
      - ./.tmp/http2s3-Metadata:/usr/src/app/localMetadata
+    networks:
+      - default
+
+networks:
+    default:
+        driver:  bridge
+        enable_ipv6: false
