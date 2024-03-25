@@ -9,9 +9,9 @@ ENV HELLO_NAME=FromDockerfile
 
 EXPOSE 8000/tcp
 
-COPY ./usr/share/nginx/html/* /usr/share/nginx/html/
-COPY ./etc/nginx/conf.d/*     /etc/nginx/conf.d/
-COPY ./etc/nginx/default.d/*  /etc/nginx/default.d/
-COPY ./etc/nginx/*            /etc/nginx/
+COPY ./add_to_image/usr/share/nginx/html/* /usr/share/nginx/html/
+COPY ./add_to_image/etc/nginx/conf.d/*     /etc/nginx/conf.d/
+COPY ./add_to_image/etc/nginx/default.d/*  /etc/nginx/default.d/
+COPY ./add_to_image/etc/nginx/*            /etc/nginx/
 
 CMD ["nginx", "-c", "/etc/nginx/before.nginx.conf"]

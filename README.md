@@ -7,7 +7,7 @@ start .\bin\run
 ```
 * Open
 ```
-start http://localhost:85
+start http://localhost:81
 ```
 * Clean
 ```
@@ -22,7 +22,7 @@ start http://localhost:85
 ./bin/run.sh
 ```
 * Open
-http://localhost:85
+http://localhost:81
 
 * Clean
 ```
@@ -38,10 +38,3 @@ docker-compose up
 
 ## Links
 * [Я сделал свой PyPI-репозитарий с авторизацией и S3. На Nginx](https://habr.com/ru/articles/518126/)
-
-COPY ./html/*       ./usr/share/nginx/html/
-COPY ./conf.d/*     ./etc/nginx/conf.d/
-COPY ./js/*         ./etc/nginx/conf.d/
-COPY ./default.d/*  ./etc/nginx/default.d/
-COPY ./nginx.conf/* ./etc/nginx/
-

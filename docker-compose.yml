@@ -3,7 +3,6 @@ services:
   http2s3:
     image: editorbank/http2s3
     build: .
-    #network_mode: "host"  
     ports:
       - 81:8001
     restart: always
@@ -19,7 +18,6 @@ services:
 
   s3svr:
     image: scality/s3server
-    #network_mode: "host"  
     ports:
       - 82:8000
     environment:
