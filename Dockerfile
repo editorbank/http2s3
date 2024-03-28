@@ -9,9 +9,12 @@ ENV HELLO_NAME=FromDockerfile
 
 EXPOSE 8000/tcp
 
-COPY ./add_to_image/usr/share/nginx/html/* /usr/share/nginx/html/
-COPY ./add_to_image/etc/nginx/conf.d/*     /etc/nginx/conf.d/
-COPY ./add_to_image/etc/nginx/default.d/*  /etc/nginx/default.d/
-COPY ./add_to_image/etc/nginx/*            /etc/nginx/
+# COPY ./src/usr/share/nginx/html/* /usr/share/nginx/html/
+# COPY ./src/etc/nginx/conf.d/*     /etc/nginx/conf.d/
+# COPY ./src/etc/nginx/default.d/*  /etc/nginx/default.d/
+# COPY ./src/etc/nginx/*            /etc/nginx/
+COPY ./src            /
 
-CMD ["nginx", "-c", "/etc/nginx/before.nginx.conf"]
+# CMD ["nginx", "-c", "/app/nginx.conf"]
+CMD ["/app/run.sh"]
+ENTRYPOINT ["/bin/sh"]

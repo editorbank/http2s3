@@ -4,15 +4,16 @@ services:
     image: editorbank/http2s3
     build: .
     ports:
-      - 81:8001
-    restart: always
+      - 81:8000
+    #restart: always
     environment:
+     #- IN_PORT=8000
      - S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE
      - S3_SECRET_KEY=YOUR-SECRET-KEY-HERE
      - S3_HOST=s3svr
      - S3_PORT=8000
-     - S3_PROTOCOL=http
-     - S3_BUCKET=mybucket
+    #  - S3_PROTOCOL=http
+    #  - S3_PATH=
     networks:
       - default
 

@@ -4,7 +4,7 @@
 S3_ACCESS_KEY="YOUR-ACCESS-KEY-HERE"
 S3_SECRET_KEY="YOUR-SECRET-KEY-HERE"
 S3_HOST="localhost"
-S3_PORT=82
+S3_PORT=81
 S3_PROTOCOL=http
 #S3_URI="/mybucket/"
 S3_URI="/"
@@ -23,7 +23,7 @@ echo "Content-Type: ${content_type}"
 echo "Date: ${date_time}"
 echo "Authorization: AWS ${S3_ACCESS_KEY}:${signature}"
 echo "---"
-curl -kfD- ${url} \
+curl -kD- ${url} \
  -X ${method} \
  -H "Host: ${S3_HOST}" \
  -H "Content-Type: ${content_type}" \
