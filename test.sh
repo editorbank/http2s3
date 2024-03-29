@@ -1,3 +1,7 @@
-# For debug message
-curl -D- http://localhost:81/$1
-curl -fs -o /dev/null http://localhost:81/$1 &&echo -e "\nOK" || echo -e "\nFAIL"
+#!
+set -e
+echo Create buckets ...
+./s3cli.sh PUT /mybucket
+./s3cli.sh PUT /other-bucket
+echo Buckets list through proxy ...
+curl  --fail-with-body -sD- http://localhost:81$1 | sed 's/<Bucket>/\n<Bucket>/g' && echo -e "\nOK" || (echo -e "\nFAIL" ; exit 1)

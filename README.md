@@ -1,40 +1,25 @@
 # The HTTP bridge to S3/AWS compatible storage
 
-## Windows:
-* Run
-```
-start .\bin\run
-```
-* Open
-```
-start http://localhost:81
-```
-* Clean
-```
-.\bin\clean
+## Test commands for Linux
+
+* Run server in Docker via docker-compose
+
+```bash
+./init.sh
 ```
 
+* Test
 
-## Linux:
-
-* Run
-```
-./bin/run.sh
-```
-* Open
-http://localhost:81
-
-* Clean
-```
-./bin/clean.sh
+```bash
+./test.sh
 ```
 
-## Run via docker-compose
+* Clean work space
+
+```bash
+./clean.sh
 ```
-docker-compose up
-```
-## Image in Docker Hub
-[https://hub.docker.com/r/editorbank/http2s3](https://hub.docker.com/r/editorbank/http2s3)
 
 ## Links
+
 * [Я сделал свой PyPI-репозитарий с авторизацией и S3. На Nginx](https://habr.com/ru/articles/518126/)

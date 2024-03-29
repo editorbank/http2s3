@@ -7,13 +7,12 @@ services:
       - 81:8000
     #restart: always
     environment:
-     #- IN_PORT=8000
-     - S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE
-     - S3_SECRET_KEY=YOUR-SECRET-KEY-HERE
+     - IN_PORT=8000
+     - S3_PROTOCOL=http
      - S3_HOST=s3svr
      - S3_PORT=8000
-    #  - S3_PROTOCOL=http
-    #  - S3_PATH=
+     - S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE
+     - S3_SECRET_KEY=YOUR-SECRET-KEY-HERE
     networks:
       - default
 
