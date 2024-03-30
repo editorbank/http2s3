@@ -1,11 +1,12 @@
 version: '2'
+
 services:
+
   http2s3:
-    image: editorbank/http2s3
+    image: docker.io/editorbank/http2s3
     build: .
     ports:
-      - 81:8000
-    #restart: always
+      - 8001:8000
     environment:
      - IN_PORT=8000
      - S3_PROTOCOL=http
@@ -13,13 +14,18 @@ services:
      - S3_PORT=8000
      - S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE
      - S3_SECRET_KEY=YOUR-SECRET-KEY-HERE
+    # command:
+    #  - sleep
+    #  - 1d
     networks:
-      - default
+     - default
+    depends_on:
+     - s3svr
 
   s3svr:
-    image: scality/s3server
+    image: docker.io/scality/s3server
     ports:
-      - 82:8000
+      - 8002:8000
     environment:
      - SCALITY_ACCESS_KEY_ID=YOUR-ACCESS-KEY-HERE
      - SCALITY_SECRET_ACCESS_KEY=YOUR-SECRET-KEY-HERE

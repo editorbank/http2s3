@@ -12,7 +12,7 @@ s3cli.sh GET /
 Use alternative S3 server settings
 
 ```bash
-S3_PROTOCOL=http S3_HOST=localhost S3_PORT=81 S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE S3_SECRET_KEY=YOUR-SECRET-KEY-HERE s3cli.sh GET /
+S3_PROTOCOL=http S3_HOST=localhost S3_PORT=8001 S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE S3_SECRET_KEY=YOUR-SECRET-KEY-HERE s3cli.sh GET /
 ```
 
 or
@@ -20,7 +20,7 @@ or
 ```bash
 export S3_PROTOCOL=http
 export S3_HOST=localhost
-export S3_PORT=81
+export S3_PORT=8001
 export S3_ACCESS_KEY=YOUR-ACCESS-KEY-HERE
 export S3_SECRET_KEY=YOUR-SECRET-KEY-HERE
 s3cli.sh GET /
