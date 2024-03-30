@@ -1,7 +1,7 @@
-#!
+#!/bin/env bash
 set -e
 # Include config files ...
-read_properties(){ [ -f "$1" ] && source "$1" || true ; }
+function read_properties() { [ -f "$1" ] && source "$1" || true ; }
 read_properties "$(dirname $0)/s3cli.properties"
 read_properties "~/s3cli.properties"
 read_properties "./s3cli.properties"
@@ -17,7 +17,7 @@ S3_HOST="${S3_HOST:-localhost}"
 method="${1:-GET}" 
 resource="${2:-/}"
 data="$3"
-content_type="${4:-plain/text}"
+content_type="${4:-text/plain}"
 
 # Do ...
 date_time=$(date -R)
