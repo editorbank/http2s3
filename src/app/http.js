@@ -3,24 +3,18 @@ var crypt = require('crypto');
 var S3_ACCESS_KEY = process.env.S3_ACCESS_KEY;
 var S3_SECRET_KEY = process.env.S3_SECRET_KEY;
 
-function njs_version(r) {
-    r.return(200, njs.version);
-}
-
-function hello_name_function(r) {
-    return(process.env["HELLO_NAME"]||"world");
-}
-
 function s3_content_type(r) {
     var ret = r.headersIn["Content-Type"] || "application/xml";
     r.log('content_type: ' + ret);
     return ret;
 }
+
 function s3_date(r) {
     var ret = new Date().toString();
     r.log('date: ' + ret);
     return ret;
 }
+
 function s3_authorization(r) {
     var signed_text=`${r.method}\n\n${s3_content_type(r)}\n${s3_date(r)}\n${r.uri}`;
     r.log('signed_text: ' + (signed_text.replace(/[\n]/g,"\\n")));
@@ -31,9 +25,7 @@ function s3_authorization(r) {
 }
 
 export default {
-    njs_version
-    ,hello_name_function
-    ,s3_content_type
+    s3_content_type
     ,s3_date
     ,s3_authorization
 };
