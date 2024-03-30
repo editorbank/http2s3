@@ -36,6 +36,6 @@ services:
       - default
 
 networks:
-    default:
-        driver:  bridge
-        enable_ipv6: false
+  default:
+    name: http2s3_network
+    external: true
