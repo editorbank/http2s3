@@ -1,6 +1,6 @@
 #!
 echo Create buckets directly in s3 ...
-S3_PORT=8002 ./s3cli.sh PUT /mybucket
-S3_PORT=8002 ./s3cli.sh PUT /other-bucket
+S3_PORT=8002 ./bin/s3curl.sh PUT /mybucket
+S3_PORT=8002 ./bin/s3curl.sh PUT /other-bucket
 echo List of buckets from s3 directly ...
-S3_PORT=8002 ./s3cli.sh GET / | sed 's/<Bucket>/\n<Bucket>/g' &&echo -e "\nOK" || (echo -e "\nFAIL" ; exit 1) 
+S3_PORT=8002 ./bin/s3curl.sh GET / | sed 's/<Bucket>/\n<Bucket>/g' &&echo -e "\nOK" || (echo -e "\nFAIL" ; exit 1) 
