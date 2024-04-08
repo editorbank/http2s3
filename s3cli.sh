@@ -1,15 +1,57 @@
 #!/bin/env bash
 set -e
-# Include config files ...
-function read_properties() { [ -f "$1" ] && source "$1" || true ; }
-read_properties "$(dirname $0)/s3cli.properties"
-read_properties "~/s3cli.properties"
-read_properties "./s3cli.properties"
-[ -z "$S3_PROTOCOL" -a -n "$DEFAULT_S3_PROTOCOL" ] && S3_PROTOCOL="$DEFAULT_S3_PROTOCOL" || true
-[ -z "$S3_HOST" -a -n "$DEFAULT_S3_HOST" ] && S3_HOST="$DEFAULT_S3_HOST" || true
-[ -z "$S3_PORT" -a -n "$DEFAULT_S3_PORT" ] && S3_PORT="$DEFAULT_S3_PORT" || true
-[ -z "$S3_ACCESS_KEY" -a -n "$DEFAULT_S3_ACCESS_KEY" ] && S3_ACCESS_KEY="$DEFAULT_S3_ACCESS_KEY" || true
-[ -z "$S3_SECRET_KEY" -a -n "$DEFAULT_S3_SECRET_KEY" ] && S3_SECRET_KEY="$DEFAULT_S3_SECRET_KEY" || true
+
+######## used functions from https://github.com/editorbank/prop
+
+function prop_value(){
+  sed -n -r "s/^[ \t]*($1)[ \t]*=[ \t]*([\']([^\']+)[\']|[\"]([^\"]+)[\"]|([^ \t\'\"\r]+)|([^ \t\'\"\r]+([ \t]+[^ \t\'\"\r]+)+))[ \t\r]*$/\3\4\5\6/p"
+}
+
+function prop_from(){
+  key=$1
+  while [ -n "$2" ] ; do
+    if [ "--env" = "$2" ] ; then
+      value=$( env | prop_value $key )
+    else
+      value=$( [ -r "$2" ] && cat "$2" | prop_value $key || true )
+    fi
+    [ -n "$value" ] && break || true
+    shift
+  done
+  echo $value
+}
+
+function prop_export(){
+  keys=()
+  froms=()
+  prefix=""
+  suffix=""
+  mode="-k"
+  # parse params
+  while [ -n "$1" ] ; do
+    case "$1" in
+      "--prefix" ) prefix="$2" ; shift ;;
+      "--suffix" ) suffix="$2" ; shift ;;
+      "-k" ) mode="-k" ;;
+      "-f" ) mode="-f" ;;
+      *)
+        case $mode in
+          "-k" ) keys+=( "$1" ) ;;
+          "-f" ) froms+=( "$1" ) ;;
+        esac
+        ;;
+    esac
+    shift
+  done
+  # do export
+  for key in "${keys[@]}" ; do
+     export $prefix$key$suffix="$( prop_from $key ${froms[@]} )"
+  done
+}
+########
+
+# Read config files ...
+prop_export S3_PROTOCOL S3_HOST S3_PORT S3_ACCESS_KEY S3_SECRET_KEY -f --env "./s3cli.properties" "~/s3cli.properties" "$(dirname $0)/s3cli.properties"
 
 # Check settings ...
 [ -z "${S3_ACCESS_KEY}" -o -z "${S3_SECRET_KEY}" ] && ( 1>&2 echo "ERROR: Undefined S3_ACCESS_KEY or S3_SECRET_KEY!" ; exit 1 )

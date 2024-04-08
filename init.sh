@@ -12,5 +12,5 @@ if [ "$docker" == "podman" ] ; then
 fi
 
 ${docker} ps -q -f "name=$(basename $PWD)_" | xargs -r ${docker} rm -f
-${docker}-compose up --build
+${docker}-compose up --build --force-recreate
 echo DONE
